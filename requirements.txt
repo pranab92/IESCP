@@ -1,0 +1,11 @@
+Flask==2.2.3
+Jinja2==3.1.2
+Flask-SQLAlchemy==3.0.3
+Flask-WTF==1.0.0
+Flask-Bcrypt==1.0.1
+Flask-Login==0.6.0
+Werkzeug==2.2.2
+flask-restful
+python-dotenv
+flask-restx==0.5.1
+flask_securityclear

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer Dashboard</title>
+    <link rel="stylesheet" href="..\static\bootstrap-5.0.2-dist\css\bootstrap.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!--third party bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> -->
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="..\static\custom-css\style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center h-100 ">
+            <div class="col-12">
+              <div class="card bg-secondary text-white" style="border-radius: 3rem;padding-top: 12px;padding-right: 12px; padding-left: 12px;">
+                <div>
+                  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-radius: 3rem;padding-top: 12px;">
+                    <a class="navbar-brand" href="#"><b>Influencer Board</b></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="#">Profile <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Ad Request</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        </li>
+                      </ul>
+                      <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search Campaign</button>
+                      </form>
+                    </div>
+                  </nav>
+      
+                </div>
+                <div class="card-body p-5">
+                  <div class="mb-md-5 mt-md-4 pb-5">
+                    {%if influencer%}
+                      <ul>
+                        <li>
+                          Name: {{influencer.name}}
+                        </li>
+                        <li>
+                          Email: {{influencer.email}}
+                        </li>
+                        <li>
+                          Age: {{influencer.age}}
+                        </li>
+                        <li>
+                          Category: {{influencer.category}}
+                        </li>
+                        <li>
+                          Niche: {{influencer.niche}}
+                        </li>
+                        <li>
+                          Reach: {{influencer.reach}}
+                        </li>
+                        <li>
+                          Followers: {{influencer.followers}}
+                        </li>
+                        <li>
+                          Bio: {{influencer.bio}}
+                        </li>
+                      </ul>
+                    
+                      <p><button id="updateInfluencerProfile" type="button" class="btn btn-primary btn-xl btn1" ><a href="#" type="button" class="text-black-50 fw-bold" id="edit_button" data-bs-toggle="modal" data-bs-target="#editListModal" data-val="{{influencer.name}}#{{influencer.email}}#{{influencer.age}}#{{influencer.category}}#{{influencer.niche}}#{{influencer.reach}}#{{influencer.followers}}#{{influencer.bio}}">Update</a></button></p>
+                      {%endif%}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+               <!-- Edit list Modal -->
+  <form action="/influenceredit/{{influencer.user_id}}" method="POST">
+    {{ form.hidden_tag() }} 
+  <div class="modal fade" id="editListModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          <label for="Name" class="form-label">Name</label>
+          <input type="text" class="form-control" name="name" id="name">
+
+          <label for="Email" class="form-label">Email</label>
+          <input type="text" class="form-control" name="email" id="email">
+
+          <label for="Age" class="form-label">Age</label>
+          <input type="text" class="form-control" name="age" id="age">
+
+          <label for="Category" class="form-label">Category</label>
+          <input type="text" class="form-control" name="category" id="category">
+
+          <label for="Niche" class="form-label">Niche</label>
+          <input type="text" class="form-control" name="niche" id="niche">
+
+          <label for="Reach" class="form-label">Reach</label>
+          <input type="text" class="form-control" name="reach" id="reach">
+
+          <label for="Followers" class="form-label">Followers</label>
+          <input type="text" class="form-control" name="followers" id="followers">
+
+          <label for="Bio" class="form-label">Bio</label>
+          <input type="text" class="form-control" name="bio" id="bio">
+
+        </div>
+  
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+  </form>
+  <script>
+    $("#editListModal").on("show.bs.modal", function(event){
+      var st=$(event.relatedTarget).data('val');
+      var values=st.split('#');
+      console.log("Split values:", values)
+      $(this).find('#name').val(values[0]);
+      $(this).find('#email').val(values[1]);
+      $(this).find('#age').val(values[2]);
+      $(this).find('#category').val(values[3]);
+      $(this).find('#niche').val(values[4]);
+      $(this).find('#reach').val(values[5]);
+      $(this).find('#followers').val(values[6]);
+      $(this).find('#bio').val(values[7]);
+
+    });
+  </script>
+
+        </body>
+</html>

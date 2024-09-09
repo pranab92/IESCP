@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="..\static\bootstrap-5.0.2-dist\css\bootstrap.min.css">
+
+    <link rel="stylesheet" href="..\static\bootstrap-5.0.2-dist\css\bootstrap.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="..\static\custom-css\style.css">
+      
+
+</head>
+<body>
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-6 col-lg-6 col-xl-5">
+              <div class="card bg-secondary text-white" style="border-radius: 3rem;">
+                <div class="card-body p-5 text-center">
+                  
+                  <div class="mb-md-5 mt-md-4 pb-5">
+      
+                    <h2 id="heading" class="fw-bold mb-2 text-uppercase">Login</h2>
+                    <p class="text-white-50 ">Please enter your login and password!</p>
+                    <form action="\login" method="POST"> 
+                      {{ form.hidden_tag() }}
+                      
+                    <div data-mdb-input-init class="form-outline form-white mb-4">
+                      {{ form.username.label(class="form-label", style="text-align: left;display: block;") }}
+                      {{ form.username(class="form-control form-control-sm", id="typeUsernameX", placeholder="Username", required=True) }}
+                      {% if form.username.errors %}
+                          <div class="text-danger">
+                              {% for error in form.username.errors %}
+                                  <span>{{ error }}</span>
+                              {% endfor %}
+                          </div>
+                      {% endif %} <!-- This renders the input field -->
+
+                        
+                    </div>
+                    
+                  <!-- Password Field -->
+                  <div data-mdb-input-init class="form-outline form-white mb-4">
+                    {{ form.password.label(class="form-label", style="text-align: left;display: block;") }}
+                    {{ form.password(class="form-control form-control-sm", id="typePasswordX", placeholder="Password", required=True) }}
+                    {% if form.password.errors %}
+                        <div class="text-danger">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                  <div >
+                    <p id="forgetDiv" class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+                </div>
+                <div>
+                  {{ form.submit(class="btn btn-outline-light btn-sm px-5") }}
+              </div>
+                    <div id="socialMediaDiv" class="d-flex justify-content-center text-center  pt-2">
+                      <a href="#!" class="text-white tooltip-wrapper" data-toggle="tooltip" title="Facebook"><i class="fab fa-facebook-f fa-lg"></i></a>
+                      <a href="#!" class="text-white tooltip-wrapper" data-toggle="tooltip" title="Twitter"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                      <a href="#!" class="text-white tooltip-wrapper" data-toggle="tooltip" title="Gmail"><i class="fab fa-google fa-lg mb-5"></i></a>
+                    </div>
+                  </form>  
+                  {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                      <ul class="flashed-messages">
+                        {% for message in messages %}
+                          <p>{{ message }}</p>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  {% endwith %}
+                    <div id="registerDiv" >
+                        <p class="mb-0">Don't have an account?
+                            <tr>   
+                              <form action="{{ url_for('registerInfluencer') }}">
+
+                                <td><button type="submit" class="btn btn-primary btn-xl btn1 pt-2 tooltip-wrapper" data-toggle="tooltip" title="Sign Up For Influencer"><a class="text-black-50 fw-bold">Influencer Register</a></button></td>
+                              </form>
+                              <form action="{{ url_for('registerSponsor') }}">  
+                                <td><button type="submit" class="btn btn-primary btn-xl btn1 tooltip-wrapper" data-toggle="tooltip" title="Sign Up For Sponsor"><a class="text-black-50 fw-bold ">Sponsor Register</a></button></td>
+                              </form>  
+                            </tr>    
+                        </p>
+                    </div>
+                  
+                  </div>
+      
+                  <div>
+
+                  </div>
+      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+        <script>
+            // Check if the login page was accessed from the home page
+            if (sessionStorage.getItem('loginFromHome') === 'true') {
+                // Hide specific divs
+                document.getElementById('registerDiv').classList.add('hidden');
+                document.getElementById('forgetDiv').classList.add('hidden');
+                document.getElementById('heading').textContent="Admin Login"
+
+                // Clear the flag
+                //sessionStorage.removeItem('loginFromHome');
+            }
+            if (sessionStorage.getItem('loginFromHome') === 'false')
+            {
+                document.getElementById('registerDiv').style.display = 'block';
+                document.getElementById('forgetDiv').style.display = 'block';  
+                document.getElementById('heading').textContent="User Login"
+            }
+        </script>
+    </section>
+        </body>
+</html>

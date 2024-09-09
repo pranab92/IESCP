@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsor Dashboard</title>
+    <link rel="stylesheet" href="..\static\bootstrap-5.0.2-dist\css\bootstrap.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!--third party bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> -->
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="..\static\custom-css\style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center h-100 ">
+            <div class="col-12">
+              <div class="card bg-secondary text-white" style="border-radius: 3rem;padding-top: 12px;padding-right: 12px; padding-left: 12px;">
+                <!-- <div class="card bg-primary text-white" style="border-radius: 3rem;padding-top: 12px;padding-right: 12px; padding-left: 12px;">
+                    <div class="card-body">
+                        <p>Influencer Dashboard<span style="margin-left: 38%;">
+                            <a href="#">Profile</a> | <a href="#">My Campaigns</a> | Search | <a href="#"> Create Campaign</a> | <a href="#">Request</a> | <a href="#">Logout</a></span></p> 
+                        
+                    </div>    
+
+                </div> -->
+                <div>
+                  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-radius: 3rem;padding-top: 12px;">
+                    <a class="navbar-brand" href="#"><b>Sponsor Board</b></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="{{url_for('sponsor_dashboard')}}">Profile <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{url_for('my_campaigns')}}">My Campaigns</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{url_for('create_campaign')}}">Create Campaign</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Request</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        </li>
+                      </ul>
+                      <ul >
+                        <li class="form-inline my-2 my-lg-0 nav-item">
+                          <button class="btn btn-outline-success my-2 my-sm-0" type="button"><a style="text-decoration: none" href="{{ url_for('search_influencer') }}">Search Influencer</a></button>
+                        </li> 
+                      </ul>
+                    </div>
+                  </nav>
+      
+                </div>
+                <div class="card-body p-5">
+                  <div class="mb-md-5 mt-md-4 pb-5">
+                    {%if sponsor%}
+                      <ul>
+                        <li>
+                          Name: {{sponsor.name}}
+                        </li>
+                        <li>
+                          Email: {{sponsor.email}}
+                        </li>
+                        <li>
+                          Company: {{sponsor.company_name}}
+                        </li>
+                        <li>
+                          Industry: {{sponsor.industry}}
+                        </li>
+                        <li>
+                          Budget: Rs {{sponsor.budget | int }}
+                        </li>
+                        <li>
+                          Mobile: {{sponsor.mobile}}
+                        </li>
+                        <li>
+                          Bio: {{sponsor.description}}
+                        </li>
+                      </ul>
+                    
+                    <p><button id="updateSponsorProfile" type="button" class="btn btn-primary btn-xl btn1" ><a href="#" type="button" class="text-black-50 fw-bold" id="edit_button" data-bs-toggle="modal" data-bs-target="#editListModal" data-val="{{sponsor.name}}#{{sponsor.email}}#{{sponsor.company_name}}#{{sponsor.industry}}#{{sponsor.budget}}#{{sponsor.mobile}}#{{sponsor.description}}">Update</a></button></p>
+
+                    {%endif%}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Edit list Modal -->
+  <form action="/sponsoredit/{{sponsor.user_id}}" method="POST">
+    {{ form.hidden_tag() }} 
+  <div class="modal fade" id="editListModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          <label for="Name" class="form-label">Name</label>
+          <input type="text" class="form-control" name="name" id="name">
+
+          <label for="Email" class="form-label">Email</label>
+          <input type="text" class="form-control" name="email" id="email">
+
+          <label for="Company" class="form-label">Company</label>
+          <input type="text" class="form-control" name="company" id="company">
+
+          <label for="Industry" class="form-label">Industry</label>
+          <input type="text" class="form-control" name="industry" id="industry">
+
+          <label for="Budget" class="form-label">Budget</label>
+          <input type="text" class="form-control" name="budget" id="budget">
+
+          <label for="Mobile" class="form-label">Mobile</label>
+          <input type="text" class="form-control" name="mobile" id="mobile">
+
+          <label for="Bio" class="form-label">Bio</label>
+          <input type="text" class="form-control" name="bio" id="bio">
+
+        </div>
+  
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+  </form>
+  <script>
+    $("#editListModal").on("show.bs.modal", function(event){
+      var st=$(event.relatedTarget).data('val');
+      var values=st.split('#');
+      console.log("Split values:", values)
+      $(this).find('#name').val(values[0]);
+      $(this).find('#email').val(values[1]);
+      $(this).find('#company').val(values[2]);
+      $(this).find('#industry').val(values[3]);
+      $(this).find('#budget').val(values[4]);
+      $(this).find('#mobile').val(values[5]);
+      $(this).find('#bio').val(values[6]);
+    });
+  </script>
+  </body>
+</html>

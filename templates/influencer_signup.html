@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="..\static\bootstrap-5.0.2-dist\css\bootstrap.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="..\static\custom-css\style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+<body>
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-6 col-lg-6 col-xl-5">
+              <div class="card bg-secondary text-white" style="border-radius: 3rem;">
+                <div class="card-body p-5 text-center">
+      
+                  <div class="mb-md-5 mt-md-4 pb-5">
+      
+                    <h2 class="fw-bold mb-2 text-uppercase">Influencer Registration</h2>
+                    <form action="\register_influencer" method="POST">    
+                      {{ form.hidden_tag() }}
+                    <div data-mdb-input-init class="form-outline form-white mb-2">
+                      {{ form.username.label(class="form-label", style="text-align: left;display: block;") }}
+                      {{ form.username(class="form-control form-control-sm", id="typeUsernameX", placeholder="Choose a suitable Username.", required=True) }}
+                        <!-- <label class="form-label" for="typeUsernameX" style="text-align: left;display: block;">*Username</label>
+                        <input type="text" name="uname" id="typeUsernameX" placeholder="Choose a suitable username." class="form-control form-control-sm" required/>                         -->
+                    </div>
+      
+                    <div data-mdb-input-init class="form-outline form-white mb-2">
+                      {{ form.password.label(class="form-label", style="text-align: left;display: block;") }}
+                      {{ form.password(class="form-control form-control-sm", id="typePasswordX", placeholder="Password", required=True) }}
+                        <!-- <label class="form-label" for="typePasswordX" style="text-align: left;display: block;">*Password</label>
+                      <input type="password" name="pwd" id="typePasswordX" placeholder="Password" class="form-control form-control-sm" required/> -->
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline form-white mb-2">
+                      <label class="form-label" for="typeNameX" style="text-align: left;display: block;">*Name</label>
+                      <input type="text" name="name" id="typeNameX" placeholder="Your Full Name." class="form-control form-control-sm" required/>                        
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline form-white mb-2">
+                      {{ form.email.label(class="form-label", style="text-align: left;display: block;") }}
+                      {{ form.email(class="form-control form-control-sm", id="typeEmailX", placeholder="Your mail id.", required=True) }}
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline form-white mb-2">
+                      <label class="form-label" for="typeAgeX" style="text-align: left;display: block;">Age</label>
+                      <input type="text" name="age" id="typeAgeX" placeholder="Your current age." class="form-control form-control-sm" />                        
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline form-white mb-2">
+                      <label class="form-label" for="typeCategoryX" style="text-align: left;display: block;">Category</label>
+                      <input type="text" name="category" id="typeCategoryX" placeholder="e.g. fashion, FMCG, technology, fitness" class="form-control form-control-sm"/>                        
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline form-white mb-2">
+                        <label class="form-label" for="typeNicheX" style="text-align: left;display: block;">Niche</label>
+                        <input type="text" name="niche" id="typeNicheX" placeholder="e.g. echo friendly fashion, smart phone reviews, agri." class="form-control form-control-sm"/>                        
+                      </div>
+
+                    <div data-mdb-input-init class="form-outline form-white mb-2">
+                        <label class="form-label" for="typeReachX" style="text-align: left;display: block;">Reach</label>
+                        <input type="text" name="reach" id="typeReachX" placeholder="No of followers or subscribers you have." class="form-control form-control-sm"/>                        
+                    </div>  
+                    
+                    <div data-mdb-input-init class="form-outline form-white mb-2">
+                      <label class="form-label" for="typeFollowersX" style="text-align: left;display: block;">Followers</label>
+                      <input type="text" name="followers" id="typeFollowersX" placeholder="Followers." class="form-control form-control-sm"/>                        
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline form-white mb-4">
+                      <label class="form-label" for="typeBioX" style="text-align: left;display: block;">Bio</label>
+                      <input type="text" name="bio" id="typeBioX" placeholder="A short description about you." class="form-control form-control-sm"/>                        
+                    </div>
+      
+                    <div>  
+                      <input type="hidden" id="role" name="role" value="Influencer">
+                      <!--<input type="hidden" name="_csrf" value="{{ csrf_token }}">-->
+
+                    </div>
+                    {{ form.submit(class="btn btn-outline-light btn-sm px-5") }}
+
+                    <!-- <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-sm px-5" type="submit">Sign Up</button> -->
+      
+                  </form>  
+                    <p>{{msg}}</p>
+                  </div>
+                  
+                  
+      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </body>
+</html>
