@@ -358,7 +358,9 @@ def adrequest():
         print("------4-----")
         camp_all=Campaign.query.filter_by(sponsor_id=current_user.id).all()
         print("Ad Request all Campaigns:\t",camp_all)
-        adRequest=[AdRequest.query.filter_by(campaign_id=camp.id).first() for camp in camp_all] 
+        adRequest_=[AdRequest.query.filter_by(campaign_id=camp.id).all() for camp in camp_all] 
+        adRequest=[adReq for adReq in adRequest_ if adReq is not None]
+        adRequest=sum(adRequest, [])
         print("******:\t", adRequest)
         print("Matched Ads from Adrequest table are ",adRequest,dir(adRequest[0]),dir(adRequest[0].influencer_profile))
         
