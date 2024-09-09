@@ -340,25 +340,59 @@ def search_influencer():
 @login_required
 def adrequest():
     try:
-        form=RegistrationForm()
-        print("\nAd-request Send ! ", file=sys.stderr)
+        form=AdditionalForm()
+
         if request.method=="POST":
             data=dict(list(request.form.items()))
-            print(f"Ad Fileds: {data}", file=sys.stderr)
-
-            camp_all=Campaign.query.filter_by(sponsor_id=current_user.id).all()
-            adRequest=AdRequest.query.filter_by(campaign_id=data['campaign_id']).all()
-            new_sponsor_profile=AdRequest(user_id=new_user.id,name=full_name,email=email,company_name=company,industry=industry,budget=budget,mobile=mobile,description=des)
-            db.session.add(new_sponsor_profile)
-            db.session.commit()
-            #influencer=InfluencerProfile.query.filter_by(reach=data['reach']).all()
-            #influencer = InfluencerProfile.query.filter(or_(InfluencerProfile.reach == data['reach'],InfluencerProfile.category == data['category'],InfluencerProfile.niche == data['niche'],InfluencerProfile.followers == data['followers'])).all()
-            print("Ad Request :\n:",dir(adRequest),adRequest, file=sys.stderr)
-            return render_template("search_influencer.html",form=form)
+            print(f"Ad Fields: {data}", file=sys.stderr)
+            adRequest=AdRequest.query.filter_by(influencer_id=data['influencerId'],campaign_id=data['dropdownSelect'].split("#")[1]).all()
+            print(adRequest)
+            if not adRequest:
+                if data['payment_amount']=='':
+                    data['payment_amount']=0
+                adRequest=AdRequest(influencer_id=data['influencerId'], campaign_id=data['dropdownSelect'].split("#")[1],messages=data['requirements'],payment_amount=data['payment_amount'],progress='0',engagement_rate='0', status="Pending",created_at=datetime.today())
+                db.session.add(adRequest)
+                db.session.commit()
+            print("After Adding Ad Request:\t", adRequest, file=sys.stderr)
+            #return render_template("ad_request.html", form=form, adRequests=[adRequest])      
+        print("------4-----")
+        camp_all=Campaign.query.filter_by(sponsor_id=current_user.id).all()
+        print("Ad Request all Campaigns:\t",camp_all)
+        adRequest=[AdRequest.query.filter_by(campaign_id=camp.id).first() for camp in camp_all] 
+        print("******:\t", adRequest)
+        print("Matched Ads from Adrequest table are ",adRequest,dir(adRequest[0]),dir(adRequest[0].influencer_profile))
         
-        return render_template("search_influencer.html",form=form)      
+       
+
+        return render_template("ad_request.html",form=form,adRequests=adRequest)      
     except Exception as e:
-        print(f"Error in Search Influencer: {e}", file=sys.stderr)         
+        print(f"Error in ad Request Influencer: {e}", file=sys.stderr)     
+
+@app.route('/delete_adrequest', methods=['POST'])
+@login_required
+def delete_adrequest():
+    try:
+        form=RegistrationForm()
+        print("\nDelete Ad-request Send ! ", file=sys.stderr)
+        print(request.method, file=sys.stderr)
+    
+        data=dict(list(request.form.items()))
+        print(f"Delete Ad Fields: {data}", file=sys.stderr)
+        #Delete
+        adRequest=AdRequest.query.filter_by(influencer_id=data['influencer_Id'],campaign_id=data['campaignid']).first()
+        db.session.delete(adRequest)
+        db.session.commit()
+        camp_all=Campaign.query.filter_by(sponsor_id=current_user.id).all()
+        print("Delete Ad Request all Campaigns:\t",camp_all)
+        adRequest=[]
+        adRequest=[AdRequest.query.filter_by(campaign_id=camp.id).first() for camp in camp_all]
+
+        return render_template("ad_request.html",form=form,adRequests=adRequest) 
+    
+            
+        
+    except Exception as e:
+        print(f"Error in Delete ad Request : {e}", file=sys.stderr)     
 
 @app.route('/create_campaign', methods=['GET','POST'])
 @login_required

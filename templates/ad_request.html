@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsor Dashboard</title>
+      <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS and dependencies (for dropdown functionality) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="..\static\bootstrap-5.0.2-dist\css\bootstrap.css">
+    <link rel="stylesheet" href="..\static\bootstrap-5.0.2-dist\js\bootstrap.bundle.js">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!--third party bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> -->
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="..\static\custom-css\style.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS and dependencies (for dropdown functionality) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center h-100 ">
+            <div class="col-12">
+              <div class="card bg-secondary text-white" style="border-radius: 3rem;padding-top: 12px;padding-right: 12px; padding-left: 12px;">
+              <div>
+                  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-radius: 3rem;padding-top: 12px;">
+                    <a class="navbar-brand" href="#"><b>Sponsor Board</b></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="{{url_for('sponsor_dashboard')}}">Profile <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{url_for('my_campaigns')}}">My Campaigns</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{url_for('create_campaign')}}">Create Campaign</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{url_for('adrequest')}}">Request</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        </li>
+                        
+                      </ul>
+                      <ul >
+                        <li class="form-inline my-2 my-lg-0 nav-item">
+                          <button class="btn btn-outline-success my-2 my-sm-0" type="button"><a style="text-decoration: none" href="{{ url_for('search_influencer') }}">Search Influencer</a></button>
+                        </li> 
+                      </ul>
+
+                    </div>
+                  </nav>
+      
+              </div> 
+                  <div class="card-body p-12">
+                    <div class="mb-md-5 mt-md-4 pb-5">
+                      
+                  <span>
+                    <h5 style="float: left;"> Ad Requests</h5>
+                    <h6 style="float: right;">Total Number of Ad Requests :</h6>
+                  </span>    
+                  
+                  <table class="table table-hover table-sm" style="background-color: white;">
+                    <thead>
+                      <tr>
+                        <th scope="col">Sr. No</th>
+                        <th scope="col">Influencer Name</th>
+                        <th scope="col">Campaign</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {%if adRequests%}
+                      {%for ad in adRequests%}
+                      <tr>
+                        {%if ad is not none%}
+                        <th scope="row">{{loop.index}}</th>
+                        <td>{{ad.influencer_profile.name}}</td>
+                        <td>{{ad.campaign.name}}</td>
+                        <td>{{ad.messages}}</td>
+                        <td>{{ad.status}}</td>
+                        <td><p><a href="#" type="button" class="text-black-50 fw-bold btn btn-primary" id="edit_button" data-bs-toggle="modal" data-bs-target="#editSendRequestModal" data-val="{{ad.influencer_profile.name}}#{{ad.influencer_profile.user_id}}#{{ad.campaign}}">Edit Request</a>
+                          <a href="#" type="button" class="text-black-50 fw-bold btn btn-primary" id="delete_button" data-bs-toggle="modal" data-bs-target="#deleteCampaignModal" data-val="{{ad.campaign_id}}#{{ad.influencer_id}}">Delete Request</a> </p>
+
+                        </td>
+                        {%endif%}
+                      </tr>
+                      {%endfor%}
+                     {%endif%}
+                    </tbody>
+                  </table>  
+
+                    </div>
+                  </div>    
+                  
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+       <!-- Edit Card Modal -->
+       <form action="#" method="POST">
+        {{ form.hidden_tag() }} 
+      <div class="modal fade" id="editSendRequestModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+    
+            <div class="modal-header">
+              <h5 class="modal-title">Request Form</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+
+              <label for="Name" class="form-label">Name</label>
+              <input type="text" class="form-control" name="name" id="name" disabled>
+    
+              <label for="Influencer Id" class="form-label">Influencer Id</label>
+              <input type="text" class="form-control" name="influencerId" id="influencerId" readonly>
+              
+              <div>
+                <label  for="Select Campaign" class="form-label">Select a campaign</label>
+              </br>
+                <select for="Campaigns" class="form-label" id="dropdownSelect" name="dropdownSelect">
+                  <option value="#" >Select an appropriate campaign</option>
+                  {%for campaign in camp_all%}
+                  <option value="{{ad.campaign.name}}#{{ad.campaign.id}}">{{ad.campaign.name}}</option>
+                  {%endfor%}
+                </select>
+              </div>
+              
+    
+              <label for="Payment Amount" class="form-label">Payment Amount</label>
+              <input type="text" class="form-control" name="payment_amount" id="payment_amount">
+    
+              <label for="Requirements" class="form-label">Requirements</label>
+              <textarea  class="form-control" name="requirements" id="requirements"></textarea>
+
+              <input type="hidden" class="form-control" name="influencerId" id="influencerId" >
+              
+            </div>
+      
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    </form>
+    <script>
+      $("#editSendRequestModal").on("show.bs.modal", function(event){
+        var st=$(event.relatedTarget).data('val');
+        var values=st.split('#');
+        console.log("Split values:", values)
+        $(this).find('#name').val(values[0]);
+        $(this).find('#influencerId').val(values[1]);
+        
+      });
+    </script>
+    <!-- Delete Card Modal -->
+  <form action="/delete_adrequest" method="POST">
+    {{ form.hidden_tag() }} 
+  <div class="modal fade" id="deleteCampaignModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Delete Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          <h5>Are you sure to delete this Ad Request ?</h5>
+          <input type="hidden" class="form-control" name="campaignid" id="campaignid">
+          <input type="hidden" class="form-control" name="influencer_Id" id="influencer_Id">
+
+        </div>
+
+        <div class="modal-footer" style="display: flex;justify-content: center;">
+          <button type="submit" class="btn btn-primary">Yes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+  </form>
+  <script>
+  $("#deleteCampaignModal").on("show.bs.modal", function(event){
+  var st=$(event.relatedTarget).data('val');
+  var values=st.split('#');
+  console.log("Split values:", values)
+  $(this).find('#campaignid').val(values[0]);
+  $(this).find('#influencer_Id').val(values[1]);
+  });
+  </script>
+   
+  </body>
+</html>

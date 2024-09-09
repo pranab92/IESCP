@@ -61,7 +61,7 @@
                           <a class="nav-link" href="{{url_for('create_campaign')}}">Create Campaign</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#">Request</a>
+                          <a class="nav-link" href="{{url_for('adrequest')}}">Request</a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
@@ -159,7 +159,7 @@
                                 </li>
 
                               </ul>
-                              <p><a href="#" type="button" class="btn btn-outline-success" style="position: relative; display: flex; justify-content: center;" id="edit_button" data-bs-toggle="modal" data-bs-target="#editSendRequestModal" data-val="{{influencer.name}}#{{influencer.id}}#{{camp_all}}">Send Request</a> </p>
+                              <p><a href="#" type="button" class="btn btn-outline-success" style="position: relative; display: flex; justify-content: center;" id="edit_button" data-bs-toggle="modal" data-bs-target="#editSendRequestModal" data-val="{{influencer.name}}#{{influencer.user_id}}#{{camp_all}}">Send Request</a> </p>
 
                               <!-- <li class="form-inline my-2 my-lg-0 nav-item" style="position: relative; display: flex; justify-content: center;">
                                     <button class="btn btn-outline-success" type="button">
@@ -224,7 +224,7 @@
                   <select for="Campaigns" class="form-label" id="dropdownSelect" name="dropdownSelect">
                     <option value="#" >Select an appropriate campaign</option>
                     {%for campaign in camp_all%}
-                    <option value="{{campaign.name}}">{{campaign.name}}</option>
+                    <option value="{{campaign.name}}#{{campaign.id}}">{{campaign.name}}</option>
                     {%endfor%}
                   </select>
                 </div>
@@ -236,7 +236,6 @@
                 <label for="Requirements" class="form-label">Requirements</label>
                 <textarea  class="form-control" name="requirements" id="requirements"></textarea>
   
-                <input type="hidden" class="form-control" name="influencerId" id="influencerId" >
                 
               </div>
         

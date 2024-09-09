@@ -122,7 +122,7 @@ class SponsorProfile(db.Model):
 class Campaign(db.Model):
     __tablename__ = 'campaign'
     id = db.Column(db.Integer, primary_key=True)
-    sponsor_id = db.Column(db.Integer, db.ForeignKey('sponsor_profile.id'))
+    sponsor_id = db.Column(db.Integer, db.ForeignKey('sponsor_profile.user_id'))
     #sponsor_profile_rel = db.relationship('SponsorProfile', back_populates='campaign_rel')
 
     name = db.Column(db.String(100))
@@ -144,7 +144,7 @@ class AdRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     campaign_id = db.Column(db.Integer, db.ForeignKey('campaign.id'))
     #campaign_rel = db.relationship('Campaign', back_populates='ad_request_rel')
-    influencer_id = db.Column(db.Integer, db.ForeignKey('influencer_profile.id'))
+    influencer_id = db.Column(db.Integer, db.ForeignKey('influencer_profile.user_id'))
     #influencer_profile_rel = db.relationship('InfluencerProfile', back_populates='ad_request_rel')
 
     messages = db.Column(JSON, default=list)

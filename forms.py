@@ -28,3 +28,6 @@ class CampaignForm(FlaskForm):
 
     submit = SubmitField('Create Campaign')    
     save = SubmitField('Save')
+
+class AdditionalForm(FlaskForm):
+      budget = IntegerField('Payment_Amount')
