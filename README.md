@@ -4,11 +4,11 @@ Steps To Run
 3) Through Termninal execute below code first
    a> #-----------Database Creation One Time-----------
    
-      #from models import db #only db import nothing else
+      from models import db #only db import nothing else
    
-      #from app import *
+      from app import *
    
-      #db.create_all()
+      db.create_all()
    
       #-----------End----------------------------------
 5) Now after executing above code, you have created the database in local and run app.py and go to browser
