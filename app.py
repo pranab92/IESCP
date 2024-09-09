@@ -60,6 +60,8 @@ def connection_test():
             print(inspector.get_columns(tab))
         else:
             print(f"{tab} table does not exist.")    
+            db.create_all() 
+            print("Now, tables created successfully!")
 
     except Exception as e:
         print(f"Error connecting to the database: {e}",file=sys.stderr)
