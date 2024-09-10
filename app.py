@@ -316,6 +316,27 @@ def update_influencer(user_id):
 #         db.session.commit()
 #         user_info=fetch_user_info(user_id)
 #         return render_template("user_dashboard.html",id=user_info.id,name=user_info.user_name,lists=user_info.lists)
+
+
+@app.route('/search_campaign', methods=['GET','POST'])
+@login_required
+def search_campaign():
+    try:
+        form=RegistrationForm()
+        print("\nSearch Influencer ", file=sys.stderr)
+        if request.method=="POST":
+            data=dict(list(request.form.items()))
+            print(f"Search Fileds: {data}", file=sys.stderr)
+            camp_all = Campaign.query.filter(or_(Campaign.name == data['campaignname'],Campaign.budget == data['budget'],Campaign.status == data['status'],Campaign.goals == data['goals'],Campaign.total_reach == data['totalReach'])).all()
+            print("Search Campaigns:\n:",dir(camp_all),camp_all, file=sys.stderr)
+            #return render_template("search_influencer.html",influencers=influencer,camp_all=camp_all,form=form)
+            return render_template('search_campaign.html',campaigns=camp_all,form=form)
+        
+        return render_template('search_campaign.html',campaigns="",form=form)      
+    except Exception as e:
+        print(f"Error in Search Campaigns : {e}", file=sys.stderr) 
+
+
 @app.route('/search_influencer', methods=['GET','POST'])
 @login_required
 def search_influencer():

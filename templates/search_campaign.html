@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer Dashboard</title>
+    <link rel="stylesheet" href="..\static\bootstrap-5.0.2-dist\css\bootstrap.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!--third party bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> -->
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="..\static\custom-css\style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center h-100 ">
+            <div class="col-12">
+              <div class="card bg-secondary text-white" style="border-radius: 3rem;padding-top: 12px;padding-right: 12px; padding-left: 12px;">
+                <div>
+                  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-radius: 3rem;padding-top: 12px;">
+                    <a class="navbar-brand" href="{{ url_for('influencer_dashboard') }}"><b>Influencer Board</b></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="{{ url_for('influencer_dashboard') }}">Profile <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">Ad Request</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        </li>
+                      </ul>
+                      <ul >
+                        <li class="form-inline my-2 my-lg-0 nav-item">
+                          <button class="btn btn-outline-success my-2 my-sm-0" type="button"><a style="text-decoration: none" href="{{ url_for('search_campaign') }}">Search Campaign</a></button>
+                        </li> 
+                      </ul>
+
+                    </div>
+                  </nav>
+      
+              </div> 
+                <div class="card-body px-5">
+                  <div class="mb-md-5 mt-md-4 pb-5">
+                    <!-- Write Code For Create Campaign -->
+                    <div class="row">
+                      <div class="col-sm-3">
+                    <form action="/search_campaign" method="POST">     
+                      {{ form.hidden_tag() }}
+                      <!-- Dropdown Menu -->
+                      <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" style="width:275px" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                          Select Search Field
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                          <li><a class="dropdown-item" href="#"  data-target="campaignname">Campaign Name</a></li>
+                          <li><a class="dropdown-item" href="#" data-target="budget">Budget</a></li>
+                          <li><a class="dropdown-item" href="#"  data-target="goals">Goals</a></li>
+                          <li><a class="dropdown-item" href="#"  data-target="status">Status</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#" data-target="totalReach">Total Reach</a></li>
+                        </ul>
+                      </div>
+     
+                      <!-- </div> -->
+                      <div data-mdb-input-init class="form-outline form-white mb-2">
+                        <div id="campaignname" class="mt-4">
+                          <input type="text" class="form-control" name='campaignname' placeholder="Campaign Name...">
+                        </div>
+                        
+                        <div id="budget" class="mt-4 d-none">
+                          <input type="text" class="form-control" name='budget' placeholder="Budget...">
+                        </div>
+                        
+                        <div id="goals" class="mt-4 d-none">
+                          <input type="text" class="form-control" name='goals' placeholder="Goals...">
+                        </div>
+                        
+                        <div id="status" class="mt-4 d-none">
+                          <input type="text" class="form-control" name='status' placeholder="Status...">
+                        </div>
+
+                        <div id="totalReach" class="mt-4 d-none">
+                          <input type="text" class="form-control" name='totalReach' placeholder="Total Reach...">
+                        </div>
+                      </div> 
+  
+           
+                      <div>  
+  
+                      </div>
+                     
+                      
+                      <br>
+                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-sm px-5" style="width:275px" type="submit">Search</button>
+        
+                    </form> 
+                      </div>
+                    </div>
+
+                    </div>
+                </div>
+                {%if campaigns%}
+                <div class="card-body p-5">
+                  <div class="mb-md-5 mt-md-4 pb-5">
+                    <!-- Write Code Here -->
+                    <div class="row">
+                      {%for camp in campaigns%}
+                      <div class="col-sm-3">
+                        <div class="card">
+                          <div class="card-body text-dark">
+                            <h5 class="card-title card-title-sq-box">{{camp.name}}</h5>
+                            <p class="card-text"> 
+                              <ul>
+                                <li>
+                                  Description: {{camp.description}}
+                                </li>
+                                <li>
+                                  Start Date: {{camp.start_date}}
+                                </li>
+                                <li>
+                                  End Date: {{camp.end_date}}
+                                </li>
+                                <li>
+                                  Status: {{camp.status}}
+                                </li>
+
+                              </ul>
+                              <span style="display: inline-flex; gap: 5px;width: 100%; "><a href="#" type="button" class="btn btn-outline-success" style="flex-grow: 1; display: flex; justify-content: center;" id="edit_button" data-bs-toggle="modal" data-bs-target="#editSendRequestModal" data-val="{{camp.name}}#{{camp.id}}#{{camp_all}}">Send Request</a> 
+                              <a href="#" type="button" class="btn btn-outline-success" style="flex-grow: 1;display: flex; justify-content: center;" id="view_button" data-bs-toggle="modal" data-bs-target="#viewCampaignModal" data-val="{{camp.name}}#{{camp.description}}#{{camp.budget}}#{{camp.start_date}}#{{camp.end_date}}#{{camp.visibility}}#{{camp.goals}}#{{camp.status}}#{{camp.total_reach}}">Detail View</a> 
+                              </span>
+
+
+                          </div>
+                        </div>
+                      </div> 
+                      {%endfor%}
+                    </div>
+                    {%else%}
+                    <div class="card-body p-5">
+                      <div class="mb-md-5 mt-md-4 pb-5">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <div class="card">
+                          <div class="card-body text-dark bg-warning mb-3">
+                            <h5 class="card-title">Display Campaigns</h5>
+                            <p class="card-text">There are no campaigns searched by you !</p>
+                            <a href="{{url_for('search_campaign')}}" class="btn btn-primary" >Search Again</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                
+                {%endif%}
+
+              </div>
+            </div>
+          </div>
+        </div>
+         <!-- Edit Card Modal -->
+         <form action="#" method="POST">
+          {{ form.hidden_tag() }} 
+        <div class="modal fade" id="editSendRequestModal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+      
+              <div class="modal-header">
+                <h5 class="modal-title">Request Form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              
+              <div class="modal-body">
+
+                <label for="Name" class="form-label">Campaign Name</label>
+                <input type="text" class="form-control" name="name" id="name" disabled>
+      
+                <label for="Campaign Id" class="form-label">Campaign Id</label>
+                <input type="text" class="form-control" name="campaignId" id="campaignId">
+                
+                
+      
+                <label for="Payment Amount" class="form-label">Payment Amount</label>
+                <input type="text" class="form-control" name="payment_amount" id="payment_amount">
+      
+                <label for="Message" class="form-label">Message</label>
+                <textarea  class="form-control" name="message" id="message"></textarea>
+  
+                
+              </div>
+        
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+      </form>
+      <script>
+        $("#editSendRequestModal").on("show.bs.modal", function(event){
+          var st=$(event.relatedTarget).data('val');
+          var values=st.split('#');
+          console.log("Split values:", values)
+          $(this).find('#name').val(values[0]);
+          $(this).find('#campaignId').val(values[1]);
+          
+        });
+      </script>
+       </section>
+       <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const dropdownItems = document.querySelectorAll('.dropdown-item');
+          const allDivs = document.querySelectorAll('#campaignname, #budget, #goals, #status, #totalReach');
+      
+          dropdownItems.forEach(item => {
+            item.addEventListener('click', function(event) {
+              event.preventDefault(); // Prevent default link behavior
+      
+              // Hide all divs initially
+              allDivs.forEach(div => div.classList.add('d-none'));
+      
+              // Show the selected div
+              const targetId = this.getAttribute('data-target');
+              const targetDiv = document.getElementById(targetId);
+              if (targetDiv) {
+                targetDiv.classList.remove('d-none');
+              }
+;
+              
+
+              
+            });
+          });
+        });
+      </script>
+      <!-- View Card Modal -->
+      <form >
+        {{ form.hidden_tag() }} 
+      <div class="modal fade" id="viewCampaignModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h5 class="modal-title">View Profile</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+
+              <label for="Name" class="form-label">Name</label>
+              <input type="text" class="form-control" name="name" id="name" disabled>
+
+              <label for="Description" class="form-label">Description</label>
+              <input type="text" class="form-control" name="description" id="description" disabled>
+
+              <label for="Budget" class="form-label">Budget</label>
+              <input type="text" class="form-control" name="budget" id="budget" disabled>
+
+              <label for="start_date" class="form-label">Start Date</label>
+              <input type="date" class="form-control" name="start_date" id="start_date" disabled>
+
+              <label for="end_date" class="form-label">End Date</label>
+              <input type="date" class="form-control" name="end_date" id="end_date" disabled>
+
+              <label for="Visibility" class="form-label">Visibility</label>
+              <input type="text" class="form-control" name="visibility" id="visibility" disabled>
+              <!-- <input type="radio" name="visibility" value="Public" checked="Public">Male</input>
+              <input type="radio" name="visibility" value="Private">Private</input>
+            -->
+              <label for="Goals" class="form-label">Goals</label>
+              <input type="text" class="form-control" name="goals" id="goals" disabled>
+
+              <label for="Status" class="form-label">Status</label>
+              <input type="text" class="form-control" name="status" id="status" disabled>
+
+              <label for="Total Reach" class="form-label">Total Reach</label>
+              <input type="text" class="form-control" name="total_reach" id="total_reach" disabled>
+            </div>
+
+            <div class="modal-footer" style="display: flex;justify-content: center;">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+      </form>
+      <script>
+      $("#viewCampaignModal").on("show.bs.modal", function(event){
+      var st=$(event.relatedTarget).data('val');
+      var values=st.split('#');
+      console.log("Split values:", values)
+      $(this).find('#name').val(values[0]);
+      $(this).find('#description').val(values[1]);
+      $(this).find('#budget').val(values[2]);
+      $(this).find('#start_date').val(values[3]);
+      $(this).find('#end_date').val(values[4]);
+      $(this).find('#visibility').val(values[5]);
+      $(this).find('#goals').val(values[6]);
+      $(this).find('#status').val(values[7]);
+      $(this).find('#total_reach').val(values[8]);
+      });
+      </script>
+  </body>
+</html>
