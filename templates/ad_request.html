@@ -83,7 +83,7 @@
                       
                   <span>
                     <h5 style="float: left;"> Ad Requests</h5>
-                    <h6 style="float: right;">Total Number of Ad Requests :</h6>
+                    <h6 style="float: right;">Total Number of Ad Requests : {{adRequests|length}}</h6>
                   </span>    
                   
                   <table class="table table-hover table-sm" style="background-color: white;">
@@ -107,7 +107,7 @@
                         <td>{{ad.campaign.name}}</td>
                         <td>{{ad.messages}}</td>
                         <td>{{ad.status}}</td>
-                        <td><p><a href="#" type="button" class="text-black-50 fw-bold btn btn-primary" id="edit_button" data-bs-toggle="modal" data-bs-target="#editSendRequestModal" data-val="{{ad.influencer_profile.name}}#{{ad.influencer_profile.user_id}}#{{ad.campaign}}">Edit Request</a>
+                        <td><p><a href="#" type="button" class="text-black-50 fw-bold btn btn-primary" id="edit_button" data-bs-toggle="modal" data-bs-target="#editSendRequestModal" data-val="{{ad.influencer_profile.name}}#{{ad.influencer_profile.user_id}}#{{ad.campaign.name}}#{{ad.payment_amount}}#{{ad.messages}}#{{ad.campaign.id}}#{{ad.id}}">Edit Request</a>
                           <a href="#" type="button" class="text-black-50 fw-bold btn btn-primary" id="delete_button" data-bs-toggle="modal" data-bs-target="#deleteCampaignModal" data-val="{{ad.campaign_id}}#{{ad.influencer_id}}">Delete Request</a> </p>
 
                         </td>
@@ -128,7 +128,7 @@
           </div>
         </div>
        <!-- Edit Card Modal -->
-       <form action="#" method="POST">
+       <form action="/editAdrequest" method="POST">
         {{ form.hidden_tag() }} 
       <div class="modal fade" id="editSendRequestModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
@@ -145,18 +145,25 @@
               <input type="text" class="form-control" name="name" id="name" disabled>
     
               <label for="Influencer Id" class="form-label">Influencer Id</label>
-              <input type="text" class="form-control" name="influencerId" id="influencerId" readonly>
+              <input type="text" class="form-control" name="influencerId" id="influencerId" >
+
+              <label for="Campaign Name" class="form-label">Campaign Name</label>
+              <input type="text" class="form-control" name="dropdownSelect" id="dropdownSelect" readonly>
               
-              <div>
+              <input type="hidden" class="form-control" name="campaignid" id="campaignid">
+              <input type="hidden" class="form-control" name="adrequestId" id="adrequestId">
+
+              
+              <!-- <div>
                 <label  for="Select Campaign" class="form-label">Select a campaign</label>
               </br>
                 <select for="Campaigns" class="form-label" id="dropdownSelect" name="dropdownSelect">
                   <option value="#" >Select an appropriate campaign</option>
-                  {%for campaign in camp_all%}
+                  {%for ad in adRequests%}
                   <option value="{{ad.campaign.name}}#{{ad.campaign.id}}">{{ad.campaign.name}}</option>
                   {%endfor%}
                 </select>
-              </div>
+              </div> -->
               
     
               <label for="Payment Amount" class="form-label">Payment Amount</label>
@@ -165,7 +172,6 @@
               <label for="Requirements" class="form-label">Requirements</label>
               <textarea  class="form-control" name="requirements" id="requirements"></textarea>
 
-              <input type="hidden" class="form-control" name="influencerId" id="influencerId" >
               
             </div>
       
@@ -185,6 +191,11 @@
         console.log("Split values:", values)
         $(this).find('#name').val(values[0]);
         $(this).find('#influencerId').val(values[1]);
+        $(this).find('#dropdownSelect').val(values[2]);
+        $(this).find('#payment_amount').val(values[3]);
+        $(this).find('#requirements').val(values[4]);
+        $(this).find('#campaignid').val(values[5]);
+        $(this).find('#adrequestId').val(values[6]);
         
       });
     </script>

@@ -355,16 +355,13 @@ def adrequest():
                 db.session.commit()
             print("After Adding Ad Request:\t", adRequest, file=sys.stderr)
             #return render_template("ad_request.html", form=form, adRequests=[adRequest])      
-        print("------4-----")
         camp_all=Campaign.query.filter_by(sponsor_id=current_user.id).all()
         print("Ad Request all Campaigns:\t",camp_all)
         adRequest_=[AdRequest.query.filter_by(campaign_id=camp.id).all() for camp in camp_all] 
         adRequest=[adReq for adReq in adRequest_ if adReq is not None]
         adRequest=sum(adRequest, [])
         print("******:\t", adRequest)
-        print("Matched Ads from Adrequest table are ",adRequest,dir(adRequest[0]),dir(adRequest[0].influencer_profile))
-        
-       
+    
 
         return render_template("ad_request.html",form=form,adRequests=adRequest)      
     except Exception as e:
@@ -395,6 +392,40 @@ def delete_adrequest():
         
     except Exception as e:
         print(f"Error in Delete ad Request : {e}", file=sys.stderr)     
+
+
+@app.route('/editAdrequest', methods=['POST'])
+@login_required
+def editAdrequest():
+    try:
+        form=RegistrationForm()
+        data=dict(list(request.form.items()))
+        print(f" Edit Ad Fields: {data}", file=sys.stderr)
+        #Edit
+        adRequest=AdRequest.query.filter_by(id=data['adrequestId'],campaign_id=data['campaignid']).first()
+        influencer=InfluencerProfile.query.filter_by(user_id=data['influencerId']).first()
+        if not influencer:
+            pass
+        else:
+            adRequest.influencer_id=data['influencerId']
+            #adRequest.campaign_id=data['campaignid']
+            adRequest.messages=data['requirements']
+            adRequest.payment_amount=data['payment_amount']
+            # adRequest.progress=data['progress']
+            # adRequest.engagement_rate=data['engagement_rate']
+            # adRequest.status=data['status']
+            adRequest.created_at=datetime.today()
+            db.session.commit()
+        
+        print("Edit Ad Request:\t", adRequest,dir(adRequest), file=sys.stderr)
+  
+
+        return render_template("ad_request.html",form=form,adRequests=[adRequest]) 
+    
+            
+        
+    except Exception as e:
+        print(f"Error in Edit ad Request : {e}", file=sys.stderr)          
 
 @app.route('/create_campaign', methods=['GET','POST'])
 @login_required
