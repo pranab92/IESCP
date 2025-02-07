@@ -17,7 +17,7 @@ It's a platform to connect Sponsors and Influencers so that sponsors can get the
 
 **Frameworks used**
 --------------------
-SQLite for data storage
+SQLite for data storage\n
 Flask for API
 VueJS for UI
 Jinja2 templates
