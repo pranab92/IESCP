@@ -9,7 +9,8 @@ Sponsor-> User=pk; password=pk
 Influencer -> User=piu; password=piu
 
 
-**Influencer Engagement & Sponsorship Coordination Platform**
+**Influencer Engagement & Sponsorship Coordination Platform**:
+----------------------------------------------------------------
 It's a platform to connect Sponsors and Influencers so that sponsors can get their product/service advertised and influencers can get monetary benefit.
 
 **Frameworks used**
