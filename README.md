@@ -14,6 +14,7 @@ Influencer -> User=piu; password=piu
 It's a platform to connect Sponsors and Influencers so that sponsors can get their product/service advertised and influencers can get monetary benefit.
 
 **Frameworks used**
+--------------------
 SQLite for data storage
 Flask for API
 VueJS for UI
@@ -25,7 +26,8 @@ Steps to run the application
 Download zip file or clone the repository
 
 
-Roles - The platform will have three roles;
+**Roles - The platform will have three roles**;
+-----------------------------------------------
 Admin - root access
 An admin can monitor all the users/campaigns, see all the statistics Ability to flag inappropriate campaigns/users
 Sponsors - a company/individual who wants to advertise their product/service
@@ -44,7 +46,9 @@ Each Influencer profile may have:
 Name
 Category
 Niche
+
 **Terminologies Used**
+----------------------------
 Ad request :
 A contract between campaign and influencer, stating the requirements of the particular advertisement (E.g. show Samsung s23 in 3 videos for 10 seconds each), the amount to be paid etc.
 Ad request have:
@@ -64,7 +68,9 @@ end_date
 budget
 visibility (public, private)
 goals
+
 **Core Functionalities**
+--------------------------
 1. Admin login and user login (RBAC)
 A login/register form with fields like username, password etc. for sponsor, influencer and admin login.
 The application have only one admin identified by its role.
