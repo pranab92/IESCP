@@ -17,14 +17,22 @@ It's a platform to connect Sponsors and Influencers so that sponsors can get the
 
 **Frameworks used**
 --------------------
-SQLite for data storage\n
+SQLite for data storage
+
 Flask for API
+
 VueJS for UI
+
 Jinja2 templates
+
 Bootstrap for HTML generation and styling
+
 Redis for caching
+
 Redis and Celery for batch jobs
+
 Steps to run the application
+
 Download zip file or clone the repository
 
 
