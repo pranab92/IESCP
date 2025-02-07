@@ -1,5 +1,6 @@
-Run app.py   
+Run app.py 
+-----------------
 You can register for Sponsor or Influencer .
-otherwise you ca directly use exsting users.
+otherwise you can directly use existing users.
 Sponsor-> User=pk; password=pk
 Influencer -> User=piu; password=piu
