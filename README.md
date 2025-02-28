@@ -1,5 +1,6 @@
 
-#Influencer-Engagement-Sponsorship-Coordination-Platform
+# Influencer-Engagement-Sponsorship-Coordination-Platform
+IESCP is a platform to connect Sponsors and Influencers so that sponsors can get their product/service advertised and influencers can get monetary benefit
 -----------------------------------------------------
 **Steps To See The Website and Try to explore ->**
 
