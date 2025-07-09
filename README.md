@@ -1,2 +1,2 @@
 # Influencer-Engagement-Sponsorship-Coordination-Platform
-Run app.py
+Run-> python app.py
